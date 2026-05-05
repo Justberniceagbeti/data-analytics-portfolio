@@ -87,3 +87,52 @@ if os.path.exists("soft_life_data.csv"):
 
 else:
     st.info("No data yet. Start your first check-in 🌸")
+    st.subheader("Your Dashboard")
+
+if os.path.exists("soft_life_data.csv"):
+    data = pd.read_csv(
+        "soft_life_data.csv",
+        names=["Date","Mood","Energy","Habits","Score","Journal"]
+    )
+
+    st.line_chart(data["Energy"])
+    st.line_chart(data["Score"])
+
+    # ===== PASTE STARTS HERE =====
+
+    st.markdown("---")
+    st.subheader("📊 Weekly Summary")
+
+    if len(data) >= 7:
+        last_7 = data.tail(7)
+
+        avg_energy = round(last_7["Energy"].mean(), 1)
+        avg_score = round(last_7["Score"].mean(), 1)
+
+        st.write(f"Average Energy (7 days): {avg_energy}")
+        st.write(f"Wellness Score (7 days): {avg_score}")
+    else:
+        st.info("Track at least 7 days to see weekly insights 🌿")
+
+    st.markdown("---")
+    st.subheader("🧠 Mood Insights")
+
+    top_mood = data["Mood"].mode()[0]
+    st.write(f"Your most frequent mood: {top_mood}")
+
+    st.markdown("---")
+
+    if len(data) >= 3:
+        if data["Score"].tail(3).mean() < 40:
+            st.error("⚠️ You may be heading toward burnout. Slow down and rest.")
+
+    st.markdown("---")
+
+    if len(data) > 1:
+        if data["Score"].iloc[-1] > data["Score"].iloc[0]:
+            st.success("You're improving. Keep going 🌸")
+
+    # ===== PASTE ENDS HERE =====
+
+else:
+    st.info("No data yet. Start your first check-in 🌸")
