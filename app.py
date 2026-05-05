@@ -81,8 +81,11 @@ if os.path.exists("soft_life_data.csv"):
         "soft_life_data.csv",
         names=["Date","Mood","Energy","Habits","Score","Journal"]
     )
-data["Date"] = pd.to_datetime(data["Date"])
-data = data.sort_values("Date")
+
+    # Fix date format
+    data["Date"] = pd.to_datetime(data["Date"])
+    data = data.sort_values("Date")
+
     # Energy Chart
     st.subheader("📈 Energy Trend")
     st.line_chart(data.set_index("Date")[["Energy"]])
@@ -103,7 +106,9 @@ data = data.sort_values("Date")
 
     mood_counts = data["Mood"].value_counts()
     st.bar_chart(mood_counts.sort_values(ascending=False))
-st.caption("This shows how your emotions are distributed over time 💛")
+
+    st.caption("This shows how your emotions are distributed over time 💛")
+
     st.markdown("---")
 
     # Weekly Summary
