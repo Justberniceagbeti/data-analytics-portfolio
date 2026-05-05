@@ -72,38 +72,26 @@ if st.button("Save My Day"):
 
     entry.to_csv("soft_life_data.csv", mode="a", header=False, index=False)
     st.success("Saved successfully 🌸")
-
-# Dashboard
-st.subheader("Your Dashboard")
-
-if os.path.exists("soft_life_data.csv"):
-    data = pd.read_csv(
-        "soft_life_data.csv",
-        names=["Date","Mood","Energy","Habits","Score","Journal"]
-    )
-
-    st.line_chart(data["Energy"])
-    st.line_chart(data["Score"])
-
-else:
-    st.info("No data yet. Start your first check-in 🌸")
+    # Dashboard
 st.subheader("🌿 Your Soft Life Insights")
 st.markdown("Take a gentle look at your patterns 💛")
+
 if os.path.exists("soft_life_data.csv"):
     data = pd.read_csv(
         "soft_life_data.csv",
         names=["Date","Mood","Energy","Habits","Score","Journal"]
     )
 
+    # Charts
     st.subheader("📈 Energy Trend")
-st.line_chart(data.set_index("Date")["Energy"])
+    st.line_chart(data.set_index("Date")["Energy"])
 
-st.subheader("📈 Wellness Score Trend")
-st.line_chart(data.set_index("Date")["Score"])
-
-    # ===== PASTE STARTS HERE =====
+    st.subheader("📈 Wellness Score Trend")
+    st.line_chart(data.set_index("Date")["Score"])
 
     st.markdown("---")
+
+    # Weekly Summary
     st.subheader("📊 Weekly Summary")
 
     if len(data) >= 7:
@@ -112,29 +100,32 @@ st.line_chart(data.set_index("Date")["Score"])
         avg_energy = round(last_7["Energy"].mean(), 1)
         avg_score = round(last_7["Score"].mean(), 1)
 
-       st.metric("Avg Energy (7 days)", avg_energy)
-st.metric("Wellness Score (7 days)", avg_score)
+        st.metric("Avg Energy (7 days)", avg_energy)
+        st.metric("Wellness Score (7 days)", avg_score)
     else:
         st.info("Track at least 7 days to see weekly insights 🌿")
 
     st.markdown("---")
+
+    # Mood Insight
     st.subheader("🧠 Mood Insights")
 
     top_mood = data["Mood"].mode()[0]
-st.success(f"Your most frequent mood: {top_mood} 🌸")
+    st.success(f"Your most frequent mood: {top_mood} 🌸")
+
     st.markdown("---")
 
+    # Burnout Warning
     if len(data) >= 3:
         if data["Score"].tail(3).mean() < 40:
             st.error("⚠️ You may be heading toward burnout. Slow down and rest.")
 
     st.markdown("---")
 
+    # Growth Feedback
     if len(data) > 1:
         if data["Score"].iloc[-1] > data["Score"].iloc[0]:
             st.success("You're improving. Keep going 🌸")
-
-    # ===== PASTE ENDS HERE =====
 
 else:
     st.info("No data yet. Start your first check-in 🌸")
