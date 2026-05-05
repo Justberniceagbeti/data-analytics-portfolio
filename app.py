@@ -84,11 +84,11 @@ if os.path.exists("soft_life_data.csv"):
 
     # Energy Chart
     st.subheader("📈 Energy Trend")
-    st.line_chart(data.set_index("Date")["Energy"])
+    st.line_chart(data.set_index("Date")[["Energy"]])
 
     # Score Chart
     st.subheader("📈 Wellness Score Trend")
-    st.line_chart(data.set_index("Date")["Score"])
+    st.line_chart(data.set_index("Date")[["Score"]])
 
     st.markdown("---")
 
@@ -101,7 +101,7 @@ if os.path.exists("soft_life_data.csv"):
     st.markdown("### Mood Distribution")
 
     mood_counts = data["Mood"].value_counts()
-    st.bar_chart(mood_counts)
+    st.bar_chart(mood_counts.sort_values())
 
     st.markdown("---")
 
@@ -135,3 +135,4 @@ if os.path.exists("soft_life_data.csv"):
 
 else:
     st.info("No data yet. Start your first check-in 🌸")
+st.caption("This shows how your emotions are distributed over time 💛")
