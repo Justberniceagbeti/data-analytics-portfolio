@@ -87,16 +87,19 @@ if os.path.exists("soft_life_data.csv"):
 
 else:
     st.info("No data yet. Start your first check-in 🌸")
-    st.subheader("Your Dashboard")
-
+st.subheader("🌿 Your Soft Life Insights")
+st.markdown("Take a gentle look at your patterns 💛")
 if os.path.exists("soft_life_data.csv"):
     data = pd.read_csv(
         "soft_life_data.csv",
         names=["Date","Mood","Energy","Habits","Score","Journal"]
     )
 
-    st.line_chart(data["Energy"])
-    st.line_chart(data["Score"])
+    st.subheader("📈 Energy Trend")
+st.line_chart(data.set_index("Date")["Energy"])
+
+st.subheader("📈 Wellness Score Trend")
+st.line_chart(data.set_index("Date")["Score"])
 
     # ===== PASTE STARTS HERE =====
 
@@ -109,8 +112,8 @@ if os.path.exists("soft_life_data.csv"):
         avg_energy = round(last_7["Energy"].mean(), 1)
         avg_score = round(last_7["Score"].mean(), 1)
 
-        st.write(f"Average Energy (7 days): {avg_energy}")
-        st.write(f"Wellness Score (7 days): {avg_score}")
+       st.metric("Avg Energy (7 days)", avg_energy)
+st.metric("Wellness Score (7 days)", avg_score)
     else:
         st.info("Track at least 7 days to see weekly insights 🌿")
 
@@ -118,8 +121,7 @@ if os.path.exists("soft_life_data.csv"):
     st.subheader("🧠 Mood Insights")
 
     top_mood = data["Mood"].mode()[0]
-    st.write(f"Your most frequent mood: {top_mood}")
-
+st.success(f"Your most frequent mood: {top_mood} 🌸")
     st.markdown("---")
 
     if len(data) >= 3:
