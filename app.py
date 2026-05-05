@@ -82,12 +82,26 @@ if os.path.exists("soft_life_data.csv"):
         names=["Date","Mood","Energy","Habits","Score","Journal"]
     )
 
-    # Charts
+    # Energy Chart
     st.subheader("📈 Energy Trend")
     st.line_chart(data.set_index("Date")["Energy"])
 
+    # Score Chart
     st.subheader("📈 Wellness Score Trend")
     st.line_chart(data.set_index("Date")["Score"])
+
+    st.markdown("---")
+
+    # Mood Section
+    st.subheader("🧠 Mood Insights")
+
+    top_mood = data["Mood"].mode()[0]
+    st.success(f"Your most frequent mood: {top_mood} 🌸")
+
+    st.markdown("### Mood Distribution")
+
+    mood_counts = data["Mood"].value_counts()
+    st.bar_chart(mood_counts)
 
     st.markdown("---")
 
@@ -107,15 +121,7 @@ if os.path.exists("soft_life_data.csv"):
 
     st.markdown("---")
 
-    # Mood Insight
-    st.subheader("🧠 Mood Insights")
-
-    top_mood = data["Mood"].mode()[0]
-    st.success(f"Your most frequent mood: {top_mood} 🌸")
-
-    st.markdown("---")
-
-    # Burnout Warning
+    # Burnout Alert
     if len(data) >= 3:
         if data["Score"].tail(3).mean() < 40:
             st.error("⚠️ You may be heading toward burnout. Slow down and rest.")
