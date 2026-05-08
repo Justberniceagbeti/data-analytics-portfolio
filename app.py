@@ -203,47 +203,49 @@ if os.path.exists("soft_life_data.csv"):
 
     col1, col2, col3 = st.columns(3)
 
-with col1:
-    st.markdown(f"""
-    <div style="
-    background:#fff0f5;
-    padding:20px;
-    border-radius:20px;
-    text-align:center;
-    box-shadow:0px 4px 15px rgba(0,0,0,0.05);
-    ">
-        <h3>🌸 Wellness Score</h3>
-        <h1>{latest_score}</h1>
-    </div>
-    """, unsafe_allow_html=True)
+    col1, col2, col3 = st.columns(3)
 
-with col2:
-    st.markdown(f"""
-    <div style="
-    background:#fef6e4;
-    padding:20px;
-    border-radius:20px;
-    text-align:center;
-    box-shadow:0px 4px 15px rgba(0,0,0,0.05);
-    ">
-        <h3>⚡ Energy Level</h3>
-        <h1>{latest_energy}</h1>
-    </div>
-    """, unsafe_allow_html=True)
+    with col1:
+        st.markdown(f"""
+        <div style="
+        background:#fff0f5;
+        padding:20px;
+        border-radius:20px;
+        text-align:center;
+        box-shadow:0px 4px 15px rgba(0,0,0,0.05);
+        ">
+            <h3>🌸 Wellness Score</h3>
+            <h1>{latest_score}</h1>
+        </div>
+        """, unsafe_allow_html=True)
 
-with col3:
-    st.markdown(f"""
-    <div style="
-    background:#edf7ed;
-    padding:20px;
-    border-radius:20px;
-    text-align:center;
-    box-shadow:0px 4px 15px rgba(0,0,0,0.05);
-    ">
-        <h3>✅ Habits Done</h3>
-        <h1>{latest_habits}</h1>
-    </div>
-    """, unsafe_allow_html=True)
+    with col2:
+        st.markdown(f"""
+        <div style="
+        background:#fef6e4;
+        padding:20px;
+        border-radius:20px;
+        text-align:center;
+        box-shadow:0px 4px 15px rgba(0,0,0,0.05);
+        ">
+            <h3>⚡ Energy Level</h3>
+            <h1>{latest_energy}</h1>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown(f"""
+        <div style="
+        background:#edf7ed;
+        padding:20px;
+        border-radius:20px;
+        text-align:center;
+        box-shadow:0px 4px 15px rgba(0,0,0,0.05);
+        ">
+            <h3>✅ Habits Done</h3>
+            <h1>{latest_habits}</h1>
+        </div>
+        """, unsafe_allow_html=True)
     if len(data) >= 7:
 
         last_7 = data.tail(7)
