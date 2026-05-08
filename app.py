@@ -8,16 +8,16 @@ st.set_page_config(page_title="Soft Life System", page_icon="🌸")
 st.markdown("""
 <style>
 
-.main {
+.stApp {
     background-color: #fffafc;
 }
 
 h1, h2, h3 {
     color: #5c3b52;
-    font-family: 'Georgia', serif;
+    font-family: Georgia, serif;
 }
 
-.stButton>button {
+.stButton > button {
     background-color: #f7d6e0;
     color: #5c3b52;
     border-radius: 12px;
@@ -26,21 +26,13 @@ h1, h2, h3 {
     font-weight: bold;
 }
 
-.stButton>button:hover {
+.stButton > button:hover {
     background-color: #efbdd0;
     color: #4a2f40;
 }
 
-div[data-baseweb="select"] {
-    border-radius: 10px;
-}
-
-.stTextArea textarea {
-    border-radius: 12px;
-}
-
-.stSlider {
-    color: #d291bc;
+textarea {
+    border-radius: 12px !important;
 }
 
 [data-testid="stMetric"] {
