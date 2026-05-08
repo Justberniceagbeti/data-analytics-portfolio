@@ -186,7 +186,22 @@ if os.path.exists("soft_life_data.csv"):
 
     # Weekly Summary
     st.subheader("📊 Weekly Summary")
+if len(data) >= 1:
 
+    latest_score = data["Score"].iloc[-1]
+    latest_energy = data["Energy"].iloc[-1]
+    latest_habits = data["Habits"].iloc[-1]
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric("🌸 Wellness Score", latest_score)
+
+    with col2:
+        st.metric("⚡ Energy Level", latest_energy)
+
+    with col3:
+        st.metric("✅ Habits Done", latest_habits)
     if len(data) >= 7:
         last_7 = data.tail(7)
 
