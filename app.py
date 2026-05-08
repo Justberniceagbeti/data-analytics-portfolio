@@ -43,8 +43,26 @@ textarea {
 
 </style>
 """, unsafe_allow_html=True)
-st.title("🌸 Soft Life System")
-st.write("Welcome back. Take a moment to check in with yourself 💛")
+st.markdown("""
+<div style='
+background: linear-gradient(135deg, #fce7f3, #fdf2f8);
+padding: 30px;
+border-radius: 25px;
+margin-bottom: 20px;
+box-shadow: 0px 4px 20px rgba(0,0,0,0.05);
+'>
+
+<h1 style='color:#5c3b52;'>
+🌸 Soft Life System
+</h1>
+
+<p style='font-size:18px; color:#6b4c63;'>
+Welcome back beautiful 💛<br>
+Track your wellness, emotions, habits, and healing journey gently.
+</p>
+
+</div>
+""", unsafe_allow_html=True)
 
 # Affirmations
 affirmations = [
