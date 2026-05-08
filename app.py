@@ -27,13 +27,27 @@ mood = st.selectbox(
 )
 
 energy = st.slider("Energy Level", 1, 10, 5)
+
+sleep = st.slider("Hours Slept", 0, 12, 7)
+
+water = st.slider("Water Intake (cups)", 0, 10, 4)
+
 habits = st.slider("Habits Completed", 0, 5, 0)
+
+cycle = st.selectbox(
+    "Cycle Phase",
+    ["Not Tracking", "Menstrual", "Follicular", "Ovulation", "Luteal"]
+)
 
 journal = st.text_area("Reflection")
 
 # Score logic
-score = (energy * 7) + (habits * 6)
-
+score = (
+    (energy * 5)
+    + (habits * 5)
+    + (sleep * 4)
+    + (water * 2)
+)
 if mood == "Happy":
     score += 10
 elif mood == "Calm":
@@ -65,9 +79,12 @@ if st.button("Save My Day"):
         "Date": datetime.now().strftime("%Y-%m-%d"),
         "Mood": mood,
         "Energy": energy,
-        "Habits": habits,
-        "Score": score,
-        "Journal": journal
+"Sleep": sleep,
+"Water": water,
+"Habits": habits,
+"Cycle": cycle,
+"Score": score,
+"Journal": journal
     }])
 
     entry.to_csv("soft_life_data.csv", mode="a", header=False, index=False)
@@ -80,7 +97,7 @@ if os.path.exists("soft_life_data.csv"):
 
     data = pd.read_csv(
         "soft_life_data.csv",
-        names=["Date","Mood","Energy","Habits","Score","Journal"]
+        names=["Date","Mood","Energy","Sleep","Water","Habits","Cycle","Score","Journal"]
     )
 
     data["Date"] = pd.to_datetime(data["Date"])
