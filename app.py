@@ -5,7 +5,52 @@ from datetime import datetime
 import os
 
 st.set_page_config(page_title="Soft Life System", page_icon="🌸")
+st.markdown("""
+<style>
 
+.main {
+    background-color: #fffafc;
+}
+
+h1, h2, h3 {
+    color: #5c3b52;
+    font-family: 'Georgia', serif;
+}
+
+.stButton>button {
+    background-color: #f7d6e0;
+    color: #5c3b52;
+    border-radius: 12px;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.stButton>button:hover {
+    background-color: #efbdd0;
+    color: #4a2f40;
+}
+
+div[data-baseweb="select"] {
+    border-radius: 10px;
+}
+
+.stTextArea textarea {
+    border-radius: 12px;
+}
+
+.stSlider {
+    color: #d291bc;
+}
+
+[data-testid="stMetric"] {
+    background-color: #fff0f5;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+</style>
+""", unsafe_allow_html=True)
 st.title("🌸 Soft Life System")
 st.write("Welcome back. Take a moment to check in with yourself 💛")
 
