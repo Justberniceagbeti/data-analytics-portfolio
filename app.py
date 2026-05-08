@@ -5,7 +5,37 @@ from datetime import datetime
 import os
 
 st.set_page_config(page_title="Soft Life System", page_icon="🌸")
+# Sidebar
 
+st.sidebar.title("🌸 Soft Life System")
+
+st.sidebar.markdown("""
+Welcome to your soft wellness space 💛
+
+Use this app to:
+- Track your emotions
+- Monitor your habits
+- Protect your peace
+- Build healthy routines
+""")
+
+st.sidebar.markdown("---")
+
+st.sidebar.subheader("🌿 Wellness Tips")
+
+tips = [
+    "Drink more water today 💧",
+    "Rest is productive 🌸",
+    "Protect your peace 🕊️",
+    "Small progress matters 💫",
+    "Take deep breaths 🌿"
+]
+
+st.sidebar.success(random.choice(tips))
+
+st.sidebar.markdown("---")
+
+st.sidebar.caption("Soft Life System v1.0")
 # Premium Styling
 st.markdown("""
 <style>
