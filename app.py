@@ -141,4 +141,8 @@ if os.path.exists("soft_life_data.csv"):
 
 else:
     st.info("No data yet. Start your first check-in 🌸")
+mood_counts = data["Mood"].value_counts()
+
+st.bar_chart(mood_counts.sort_values(ascending=False))
+
 st.caption("This shows how your emotions are distributed over time 💛")
