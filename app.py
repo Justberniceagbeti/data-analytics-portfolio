@@ -223,47 +223,83 @@ if len(data) >= 1:
 
     st.markdown("---")
 
-        # Smart Wellness Feedback
-    
-    st.markdown("---")
-    st.subheader("💛 Wellness Guidance")
-    
+        # Weekly Summary
+st.subheader("📊 Weekly Summary")
+
+if len(data) >= 1:
+
     latest_score = data["Score"].iloc[-1]
     latest_energy = data["Energy"].iloc[-1]
-    latest_mood = data["Mood"].iloc[-1]
-    
-    # Emotional insights
-    
-    if latest_mood == "Overwhelmed":
-        st.error("🌧️ You seem emotionally overwhelmed today. Try to slow down and protect your peace.")
-    
-    elif latest_mood == "Anxious":
-        st.warning("🌿 Your mind may need calm today. Rest, hydrate, and avoid pressure.")
-    
-    elif latest_mood == "Tired":
-        st.info("😴 Your body may be asking for rest. Give yourself permission to pause.")
-    
-    elif latest_mood == "Happy":
-        st.success("✨ Your energy feels lighter today. Lean into what is making you feel good.")
-    
-    elif latest_mood == "Calm":
-        st.success("🌸 You seem emotionally grounded today. Protect this peaceful energy.")
-    
-    # Energy insight
-    
-    if latest_energy <= 3:
-        st.warning("⚡ Your energy level is very low. Prioritize rest and hydration today.")
-    
-    elif latest_energy >= 8:
-        st.success("💫 Your energy is strong today. Use it gently and intentionally.")
-    
-    # Wellness score insight
-    
-    if latest_score >= 75:
-        st.success("🌷 You're currently in a healthy wellness zone.")
-    
-    elif latest_score <= 35:
-        st.error("💔 Your wellness score is low. Slow down and care for yourself gently.")
+    latest_habits = data["Habits"].iloc[-1]
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric("🌸 Wellness Score", latest_score)
+
+    with col2:
+        st.metric("⚡ Energy Level", latest_energy)
+
+    with col3:
+        st.metric("✅ Habits Done", latest_habits)
+
+if len(data) >= 7:
+    last_7 = data.tail(7)
+
+    avg_energy = round(last_7["Energy"].mean(), 1)
+    avg_score = round(last_7["Score"].mean(), 1)
+
+    st.metric("Avg Energy (7 days)", avg_energy)
+    st.metric("Wellness Score (7 days)", avg_score)
+
+else:
+    st.info("Track at least 7 days to see weekly insights 🌿")
+
+st.markdown("---")
+
+# Burnout Alert
+if len(data) >= 3:
+    if data["Score"].tail(3).mean() < 40:
+        st.error("⚠️ You may be heading toward burnout. Slow down and rest.")
+
+st.markdown("---")
+
+# Smart Wellness Feedback
+st.subheader("💛 Wellness Guidance")
+
+latest_score = data["Score"].iloc[-1]
+latest_energy = data["Energy"].iloc[-1]
+latest_mood = data["Mood"].iloc[-1]
+
+# Emotional insights
+if latest_mood == "Overwhelmed":
+    st.error("🌧️ You seem emotionally overwhelmed today. Try to slow down and protect your peace.")
+
+elif latest_mood == "Anxious":
+    st.warning("🌿 Your mind may need calm today. Rest, hydrate, and avoid pressure.")
+
+elif latest_mood == "Tired":
+    st.info("😴 Your body may be asking for rest. Give yourself permission to pause.")
+
+elif latest_mood == "Happy":
+    st.success("✨ Your energy feels lighter today. Lean into what is making you feel good.")
+
+elif latest_mood == "Calm":
+    st.success("🌸 You seem emotionally grounded today. Protect this peaceful energy.")
+
+# Energy insight
+if latest_energy <= 3:
+    st.warning("⚡ Your energy level is very low. Prioritize rest and hydration today.")
+
+elif latest_energy >= 8:
+    st.success("💫 Your energy is strong today. Use it gently and intentionally.")
+
+# Wellness score insight
+if latest_score >= 75:
+    st.success("🌷 You're currently in a healthy wellness zone.")
+
+elif latest_score <= 35:
+    st.error("💔 Your wellness score is low. Slow down and care for yourself gently.")
 
 else:
     st.info("No data yet. Start your first check-in 🌸")
