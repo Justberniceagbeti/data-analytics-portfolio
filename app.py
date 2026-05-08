@@ -85,30 +85,30 @@ mood = st.selectbox(
     "How are you feeling today?",
     ["Happy", "Calm", "Tired", "Anxious", "Overwhelmed"]
 )
-    # Mood-Based Theme Colors
-    
-    if mood == "Happy":
-        bg_color = "#fff8e7"
-    
-    elif mood == "Calm":
-        bg_color = "#eef7f2"
-    
-    elif mood == "Tired":
-        bg_color = "#f4f1ea"
-    
-    elif mood == "Anxious":
-        bg_color = "#f3efff"
-    
-    elif mood == "Overwhelmed":
-        bg_color = "#fbeff5"
-    
-    st.markdown(f"""
-    <style>
-    .stApp {{
-        background-color: {bg_color};
-    }}
-    </style>
-    """, unsafe_allow_html=True)
+ # Mood-Based Theme Colors
+
+if mood == "Happy":
+    bg_color = "#fff8e7"
+
+elif mood == "Calm":
+    bg_color = "#eef7f2"
+
+elif mood == "Tired":
+    bg_color = "#f4f1ea"
+
+elif mood == "Anxious":
+    bg_color = "#f3efff"
+
+elif mood == "Overwhelmed":
+    bg_color = "#fbeff5"
+
+st.markdown(f"""
+<style>
+.stApp {{
+    background-color: {bg_color};
+}}
+</style>
+""", unsafe_allow_html=True)   
 energy = st.slider("Energy Level", 1, 10, 5)
 
 sleep = st.slider("Hours Slept", 0, 12, 7)
