@@ -77,12 +77,12 @@ st.subheader("🌿 Your Soft Life Insights")
 st.markdown("Take a gentle look at your patterns 💛")
 
 if os.path.exists("soft_life_data.csv"):
+
     data = pd.read_csv(
         "soft_life_data.csv",
         names=["Date","Mood","Energy","Habits","Score","Journal"]
     )
 
-    # Fix date format
     data["Date"] = pd.to_datetime(data["Date"])
     data = data.sort_values("Date")
 
@@ -90,13 +90,13 @@ if os.path.exists("soft_life_data.csv"):
     st.subheader("📈 Energy Trend")
     st.line_chart(data.set_index("Date")[["Energy"]])
 
-    # Score Chart
+    # Wellness Score Chart
     st.subheader("📈 Wellness Score Trend")
     st.line_chart(data.set_index("Date")[["Score"]])
 
     st.markdown("---")
 
-    # Mood Section
+    # Mood Insights
     st.subheader("🧠 Mood Insights")
 
     top_mood = data["Mood"].mode()[0]
@@ -105,6 +105,7 @@ if os.path.exists("soft_life_data.csv"):
     st.markdown("### Mood Distribution")
 
     mood_counts = data["Mood"].value_counts()
+
     st.bar_chart(mood_counts.sort_values(ascending=False))
 
     st.caption("This shows how your emotions are distributed over time 💛")
@@ -122,12 +123,13 @@ if os.path.exists("soft_life_data.csv"):
 
         st.metric("Avg Energy (7 days)", avg_energy)
         st.metric("Wellness Score (7 days)", avg_score)
+
     else:
         st.info("Track at least 7 days to see weekly insights 🌿")
 
     st.markdown("---")
 
-    # Burnout Alert
+    # Burnout Warning
     if len(data) >= 3:
         if data["Score"].tail(3).mean() < 40:
             st.error("⚠️ You may be heading toward burnout. Slow down and rest.")
@@ -141,8 +143,3 @@ if os.path.exists("soft_life_data.csv"):
 
 else:
     st.info("No data yet. Start your first check-in 🌸")
-mood_counts = data["Mood"].value_counts()
-
-st.bar_chart(mood_counts.sort_values(ascending=False))
-
-st.caption("This shows how your emotions are distributed over time 💛")
