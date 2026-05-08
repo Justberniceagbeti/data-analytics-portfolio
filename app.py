@@ -193,7 +193,32 @@ if os.path.exists("soft_life_data.csv"):
     st.caption("This shows how your emotions are distributed over time 💛")
 
     st.markdown("---")
-
+    # Daily Streak System
+    
+    st.markdown("---")
+    st.subheader("🔥 Daily Wellness Streak")
+    
+    data["Date"] = pd.to_datetime(data["Date"])
+    
+    unique_dates = data["Date"].dt.date.drop_duplicates().sort_values()
+    
+    streak = 1
+    
+    if len(unique_dates) > 1:
+    
+        for i in range(len(unique_dates)-1, 0, -1):
+    
+            current_day = unique_dates.iloc[i]
+            previous_day = unique_dates.iloc[i-1]
+    
+            difference = (current_day - previous_day).days
+    
+            if difference == 1:
+                streak += 1
+            else:
+                break
+    
+    st.success(f"🔥 Current Streak: {streak} day(s)")
     # Weekly Summary
     st.subheader("📊 Weekly Summary")
 
