@@ -223,10 +223,47 @@ if len(data) >= 1:
 
     st.markdown("---")
 
-    # Growth Feedback
-    if len(data) > 1:
-        if data["Score"].iloc[-1] > data["Score"].iloc[0]:
-            st.success("You're improving. Keep going 🌸")
+    # Smart Wellness Feedback
+
+st.markdown("---")
+st.subheader("💛 Wellness Guidance")
+
+latest_score = data["Score"].iloc[-1]
+latest_energy = data["Energy"].iloc[-1]
+latest_mood = data["Mood"].iloc[-1]
+
+# Emotional insights
+
+if latest_mood == "Overwhelmed":
+    st.error("🌧️ You seem emotionally overwhelmed today. Try to slow down and protect your peace.")
+
+elif latest_mood == "Anxious":
+    st.warning("🌿 Your mind may need calm today. Rest, hydrate, and avoid pressure.")
+
+elif latest_mood == "Tired":
+    st.info("😴 Your body may be asking for rest. Give yourself permission to pause.")
+
+elif latest_mood == "Happy":
+    st.success("✨ Your energy feels lighter today. Lean into what is making you feel good.")
+
+elif latest_mood == "Calm":
+    st.success("🌸 You seem emotionally grounded today. Protect this peaceful energy.")
+
+# Energy insight
+
+if latest_energy <= 3:
+    st.warning("⚡ Your energy level is very low. Prioritize rest and hydration today.")
+
+elif latest_energy >= 8:
+    st.success("💫 Your energy is strong today. Use it gently and intentionally.")
+
+# Wellness score insight
+
+if latest_score >= 75:
+    st.success("🌷 You're currently in a healthy wellness zone.")
+
+elif latest_score <= 35:
+    st.error("💔 Your wellness score is low. Slow down and care for yourself gently.")
 
 else:
     st.info("No data yet. Start your first check-in 🌸")
