@@ -179,7 +179,45 @@ cycle = st.selectbox(
 )
 
 journal = st.text_area("Reflection")
+# Mood Score Logic
 
+if mood == "Happy":
+    score += 10
+
+elif mood == "Calm":
+    score += 8
+
+elif mood == "Peaceful":
+    score += 10
+
+elif mood == "Motivated":
+    score += 9
+
+elif mood == "Grateful":
+    score += 8
+
+elif mood == "Tired":
+    score -= 5
+
+elif mood == "Sad":
+    score -= 7
+
+elif mood == "Anxious":
+    score -= 8
+
+elif mood == "Lonely":
+    score -= 6
+
+elif mood == "Burnt Out":
+    score -= 12
+
+elif mood == "Overwhelmed":
+    score -= 12
+
+elif mood == "Emotionally Drained":
+    score -= 10
+
+score = max(0, min(100, score))
 # Wellness Score
 score = (
     (energy * 5)
