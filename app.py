@@ -113,32 +113,58 @@ st.subheader("Daily Check-In")
 
 mood = st.selectbox(
     "How are you feeling today?",
-    ["Happy", "Calm", "Tired", "Anxious", "Overwhelmed"]
+    [
+        "Happy",
+        "Calm",
+        "Peaceful",
+        "Motivated",
+        "Grateful",
+        "Tired",
+        "Sad",
+        "Anxious",
+        "Lonely",
+        "Burnt Out",
+        "Overwhelmed",
+        "Emotionally Drained"
+    ]
 )
- # Mood-Based Theme Colors
+ # Mood Score Logic
 
 if mood == "Happy":
-    bg_color = "#fff8e7"
+    score += 10
 
 elif mood == "Calm":
-    bg_color = "#eef7f2"
+    score += 8
+
+elif mood == "Peaceful":
+    score += 10
+
+elif mood == "Motivated":
+    score += 9
+
+elif mood == "Grateful":
+    score += 8
 
 elif mood == "Tired":
-    bg_color = "#f4f1ea"
+    score -= 5
+
+elif mood == "Sad":
+    score -= 7
 
 elif mood == "Anxious":
-    bg_color = "#f3efff"
+    score -= 8
+
+elif mood == "Lonely":
+    score -= 6
+
+elif mood == "Burnt Out":
+    score -= 12
 
 elif mood == "Overwhelmed":
-    bg_color = "#fbeff5"
+    score -= 12
 
-st.markdown(f"""
-<style>
-.stApp {{
-    background-color: {bg_color};
-}}
-</style>
-""", unsafe_allow_html=True)   
+elif mood == "Emotionally Drained":
+    score -= 10   
 energy = st.slider("Energy Level", 1, 10, 5)
 
 sleep = st.slider("Hours Slept", 0, 12, 7)
