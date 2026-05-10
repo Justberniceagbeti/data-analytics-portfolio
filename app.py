@@ -344,9 +344,15 @@ else:
     st.markdown("---")
 
     # Smart Wellness Feedback
-    st.subheader("💛 Wellness Guidance")
+
+st.markdown("---")
+st.subheader("💛 Wellness Guidance")
+
+if not data.empty:
 
     latest_mood = data["Mood"].iloc[-1]
+    latest_score = data["Score"].iloc[-1]
+    latest_energy = data["Energy"].iloc[-1]
 
     if latest_mood == "Overwhelmed":
         st.error("🌧️ You seem emotionally overwhelmed today. Try to slow down and protect your peace.")
@@ -374,3 +380,6 @@ else:
 
     elif latest_score <= 35:
         st.error("💔 Your wellness score is low. Slow down and care for yourself gently.")
+
+else:
+    st.info("Save your first wellness entry 🌸")
