@@ -410,6 +410,3 @@ if latest_habits >= 4:
 # Emotional exhaustion
 if latest_mood in ["Burnt Out", "Emotionally Drained", "Overwhelmed"]:
     st.error("🌧️ Emotional exhaustion detected. Prioritize rest and emotional care.")
-
-else:
-    st.info("Save your first wellness entry 🌸")
