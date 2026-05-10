@@ -3,8 +3,31 @@ import pandas as pd
 import random
 from datetime import datetime
 import os
-
+import sqlite3
 st.set_page_config(page_title="Soft Life System", page_icon="🌸")
+# Database Connection
+
+conn = sqlite3.connect("soft_life.db")
+
+cursor = conn.cursor()
+
+# Create Table
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS wellness_data (
+    Date TEXT,
+    Mood TEXT,
+    Energy INTEGER,
+    Sleep INTEGER,
+    Water INTEGER,
+    Habits INTEGER,
+    Cycle TEXT,
+    Score INTEGER,
+    Journal TEXT
+)
+""")
+
+conn.commit()
 # Sidebar
 
 st.sidebar.title("🌸 Soft Life System")
@@ -205,36 +228,34 @@ st.success(insight)
 # Save
 if st.button("Save My Day"):
 
-    entry = pd.DataFrame([{
-        "Date": datetime.now().strftime("%Y-%m-%d"),
-        "Mood": mood,
-        "Energy": energy,
-        "Sleep": sleep,
-        "Water": water,
-        "Habits": habits,
-        "Cycle": cycle,
-        "Score": score,
-        "Journal": journal
-    }])
+    cursor.execute("""
+INSERT INTO wellness_data
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+""", (
+    datetime.now().strftime("%Y-%m-%d"),
+    mood,
+    energy,
+    sleep,
+    water,
+    habits,
+    cycle,
+    score,
+    journal
+))
 
-    file_exists = os.path.exists("soft_life_data.csv")
+conn.commit()
 
-    entry.to_csv(
-        "soft_life_data.csv",
-        mode="a",
-        header=not file_exists,
-        index=False
-    )
-
-    st.success("Saved successfully 🌸")
+st.success("Saved successfully 🌸")
 
 # Dashboard
 st.subheader("🌿 Your Soft Life Insights")
 st.markdown("Take a gentle look at your patterns 💛")
 
-if os.path.exists("soft_life_data.csv"):
-
-    data = pd.read_csv("soft_life_data.csv")
+if True:
+    data = pd.read_sql_query(
+    "SELECT * FROM wellness_data",
+    conn
+)
 
     # Charts
     st.subheader("📈 Energy Trend")
