@@ -269,9 +269,14 @@ if True:
     # Mood Insights
     st.subheader("🧠 Mood Insights")
 
+    if not data.empty:
+
     top_mood = data["Mood"].mode()[0]
 
     st.success(f"Your most frequent mood: {top_mood} 🌸")
+
+else:
+    st.info("No mood data yet 🌿")
 
     st.markdown("### Mood Distribution")
 
