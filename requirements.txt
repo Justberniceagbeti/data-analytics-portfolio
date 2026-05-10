@@ -1,4 +1,4 @@
 streamlit
+supabase
+bcrypt
 pandas
-gspread
-oauth2client
