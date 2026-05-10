@@ -267,9 +267,9 @@ if True:
     st.markdown("---")
 
     # Mood Insights
-    st.subheader("🧠 Mood Insights")
+st.subheader("🧠 Mood Insights")
 
-    if not data.empty:
+if not data.empty:
 
     top_mood = data["Mood"].mode()[0]
 
