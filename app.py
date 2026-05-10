@@ -314,7 +314,9 @@ else:
     
     st.success(f"🔥 Current Streak: {streak} day(s)")
     # Weekly Summary
-    st.subheader("📊 Weekly Summary")
+st.subheader("📊 Weekly Summary")
+
+if not data.empty:
 
     latest_score = data["Score"].iloc[-1]
     latest_energy = data["Energy"].iloc[-1]
@@ -322,63 +324,17 @@ else:
 
     col1, col2, col3 = st.columns(3)
 
-    col1, col2, col3 = st.columns(3)
-
     with col1:
-        st.markdown(f"""
-        <div style="
-        background:#fff0f5;
-        padding:20px;
-        border-radius:20px;
-        text-align:center;
-        box-shadow:0px 4px 15px rgba(0,0,0,0.05);
-        ">
-            <h3>🌸 Wellness Score</h3>
-            <h1>{latest_score}</h1>
-        </div>
-        """, unsafe_allow_html=True)
+        st.metric("🌸 Wellness Score", latest_score)
 
     with col2:
-        st.markdown(f"""
-        <div style="
-        background:#fef6e4;
-        padding:20px;
-        border-radius:20px;
-        text-align:center;
-        box-shadow:0px 4px 15px rgba(0,0,0,0.05);
-        ">
-            <h3>⚡ Energy Level</h3>
-            <h1>{latest_energy}</h1>
-        </div>
-        """, unsafe_allow_html=True)
+        st.metric("⚡ Energy Level", latest_energy)
 
     with col3:
-        st.markdown(f"""
-        <div style="
-        background:#edf7ed;
-        padding:20px;
-        border-radius:20px;
-        text-align:center;
-        box-shadow:0px 4px 15px rgba(0,0,0,0.05);
-        ">
-            <h3>✅ Habits Done</h3>
-            <h1>{latest_habits}</h1>
-        </div>
-        """, unsafe_allow_html=True)
-    if len(data) >= 7:
+        st.metric("✅ Habits Done", latest_habits)
 
-        last_7 = data.tail(7)
-
-        avg_energy = round(last_7["Energy"].mean(), 1)
-        avg_score = round(last_7["Score"].mean(), 1)
-
-        st.metric("Avg Energy (7 days)", avg_energy)
-        st.metric("Wellness Score (7 days)", avg_score)
-
-    else:
-        st.info("Track at least 7 days to see weekly insights 🌿")
-
-    st.markdown("---")
+else:
+    st.info("No wellness data yet 🌿")
 
     # Burnout Alert
     if len(data) >= 3:
