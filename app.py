@@ -418,6 +418,3 @@ else:
 
     elif latest_score <= 35:
         st.error("💔 Your wellness score is low. Slow down and care for yourself gently.")
-
-else:
-    st.info("No data yet. Start your first check-in 🌸")
