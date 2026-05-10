@@ -321,6 +321,8 @@ if not data.empty:
     latest_score = data["Score"].iloc[-1]
     latest_energy = data["Energy"].iloc[-1]
     latest_habits = data["Habits"].iloc[-1]
+    latest_sleep = data["Sleep"].iloc[-1]
+    latest_water = data["Water"].iloc[-1]
 
     col1, col2, col3 = st.columns(3)
 
@@ -380,6 +382,34 @@ if not data.empty:
 
     elif latest_score <= 35:
         st.error("💔 Your wellness score is low. Slow down and care for yourself gently.")
+        # AI Wellness Pattern Detection
+
+st.markdown("---")
+st.subheader("🧠 AI Wellness Insights")
+
+# Low sleep detection
+if latest_sleep <= 4:
+    st.warning("😴 Your sleep levels have been low. Your body may need deeper rest.")
+
+# Hydration detection
+if latest_water <= 2:
+    st.warning("💧 Your hydration is very low today. Drink more water gently.")
+
+# Burnout pattern
+if latest_energy <= 3 and latest_score <= 40:
+    st.error("⚠️ Your recent wellness patterns suggest possible burnout.")
+
+# Healthy balance
+if latest_energy >= 7 and latest_sleep >= 7 and latest_water >= 5:
+    st.success("🌿 Your wellness habits look balanced today. Keep caring for yourself gently.")
+
+# Habit consistency
+if latest_habits >= 4:
+    st.success("✨ You're building strong healthy routines.")
+
+# Emotional exhaustion
+if latest_mood in ["Burnt Out", "Emotionally Drained", "Overwhelmed"]:
+    st.error("🌧️ Emotional exhaustion detected. Prioritize rest and emotional care.")
 
 else:
     st.info("Save your first wellness entry 🌸")
