@@ -747,13 +747,13 @@ def show_app():
         with st.form("weekly_form"):
             week_of = st.date_input("Week of")
             wins = st.text_area(
-                "🏆 My 3 wins from last week",
-                placeholder=(
-                    "1. 
-2. 
-3. "
-                )
-            )
+    "🏆 My 3 wins from last week",
+    placeholder=(
+        "1. \n"
+        "2. \n"
+        "3."
+    )
+)
             anchor_task = st.text_input(
                 "⚓ My anchor task this week",
                 placeholder=(
